@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\BlogController;
+use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,12 +25,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware('auth')->group(function () {
+    // Blog resource routes
     Route::resource('dashboard/blogs', BlogController::class)->names([
         'index' => 'dashboard.blogs.index',
         'create' => 'dashboard.blogs.create',
@@ -41,7 +42,19 @@ Route::middleware('auth')->group(function () {
     ])->parameters([
         'blogs' => 'slug'
     ]);
-});
 
+    // Project resource routes
+    Route::resource('dashboard/projects', ProjectController::class)->names([
+        'index' => 'dashboard.projects.index',
+        'create' => 'dashboard.projects.create',
+        'store' => 'dashboard.projects.store',
+        'show' => 'dashboard.projects.show',
+        'edit' => 'dashboard.projects.edit',
+        'update' => 'dashboard.projects.update',
+        'destroy' => 'dashboard.projects.destroy',
+    ])->parameters([
+        'projects' => 'slug'
+    ]);
+});
 
 require __DIR__.'/auth.php';

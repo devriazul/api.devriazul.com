@@ -17,7 +17,7 @@
                 @if ($blog->image)
                     <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" class="w-full h-auto my-4">
                 @endif
-                <p class="mt-4">{{ $blog->body }}</p>
+                <p class="mt-4">{{ $blog->content }}</p>
             </div>
         </div>
     </div>

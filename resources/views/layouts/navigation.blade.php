@@ -19,6 +19,10 @@
                         Blogs
                     </x-nav-link>
 
+                    <x-nav-link :href="route('dashboard.projects.index')" :active="request()->routeIs('dashboard.projects.index')">
+                        Projects
+                    </x-nav-link>
+
                 </div>
             </div>
 
