@@ -4,17 +4,9 @@ use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MigrationController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/migrate', [MigrationController::class, 'runMigrations'])->name('migrate');
 
 Route::get('/', function () {
     return view('welcome');
