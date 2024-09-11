@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::resource('dashboard/blogs', BlogController::class)->names([
+        'index' => 'dashboard.blogs.index',
+        'create' => 'dashboard.blogs.create',
+        'store' => 'dashboard.blogs.store',
+        'show' => 'dashboard.blogs.show',
+        'edit' => 'dashboard.blogs.edit',
+        'update' => 'dashboard.blogs.update',
+        'destroy' => 'dashboard.blogs.destroy',
+    ])->parameters([
+        'blogs' => 'slug'
+    ]);
+});
+
 
 require __DIR__.'/auth.php';
